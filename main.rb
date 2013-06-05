@@ -13,6 +13,11 @@ ActiveRecord::Base.establish_connection(
 
 require_relative "book"
 
+get "/" do
+  erb :index
+end
+
+
 get "/new_book" do
   erb :new_book
 end
