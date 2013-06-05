@@ -4,6 +4,6 @@
 <h3>Books</h3>
 <ul>
   <% @books.each do |book|%>
-    <li><a href="/edit_book/<%= book.id %>">Title: <%= book.name %> -- Genre: <%= book.genre%></li>
+    <li><a href="/edit_book/<%= book.id %>">Title: <%= book.name %> -- Genre: <%= book.genre%></a></li>
   <% end %>
 </ul>
