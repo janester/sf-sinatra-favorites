@@ -1,6 +1,7 @@
 require "sinatra"
 require "sinatra/reloader"
 require "sinatra/activerecord"
+require "pry"
 
 ActiveRecord::Base.establish_connection(
   :adapter => "postgresql",
@@ -14,6 +15,7 @@ ActiveRecord::Base.establish_connection(
 require_relative "book"
 
 get "/" do
+  @books = Book.all
   erb :index
 end
 
@@ -29,5 +31,21 @@ post "/new_book" do
     redirect "/"
   else
     erb :new_book
+  end
+end
+
+
+get "/edit_book/:book_id" do
+  @book = Book.find(params[:book_id])
+  erb :edit_book
+end
+
+
+post "/save_book/:book_id" do
+  @book = Book.find(params[:book_id])
+  if @book.update_attributes(:name => params[:book_name], :genre => params[:book_genre])
+    redirect "/"
+    else
+      erb :edit_book
   end
 end
